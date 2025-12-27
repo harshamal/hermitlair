@@ -33,7 +33,7 @@ export default function LegendSection() {
                 }} />
             </div>
 
-            <div className="max-w-[1600px] mx-auto relative z-10">
+            <div className="max-w-[1300px] mx-auto relative z-10">
                 {/* Section Header - Full Width */}
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
