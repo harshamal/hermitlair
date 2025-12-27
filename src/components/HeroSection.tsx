@@ -179,7 +179,7 @@ export default function HeroSection() {
 
                 {/* SVG & Logo Block - PERSISTENT */}
                 {/* SVG & Logo Block - PERSISTENT */}
-                <div className="relative w-[300px] h-[300px] md:w-[450px] md:h-[350px] flex items-center justify-center mb-0 md:mb-8">
+                <div className="relative w-[300px] h-[300px] md:w-[450px] md:h-[350px] flex items-center justify-center mb-0">
                     <motion.div
                         className="absolute inset-0 w-full h-full"
                     >
@@ -268,7 +268,7 @@ export default function HeroSection() {
                 {/* Typography Block */}
                 <motion.div
                     layout
-                    className="text-center relative z-20 mt-4 pointer-events-auto"
+                    className="text-center relative z-20 -mt-12 pointer-events-auto"
                 >
                     {/* Eyebrow - Hidden as per user's last edit request (commented out) */}
                     <motion.div
@@ -288,7 +288,7 @@ export default function HeroSection() {
                             textShadow: phase !== 'intro' ? "0 4px 30px rgba(0,0,0,0.8)" : "none"
                         }}
                         transition={{ duration: 4, ease: "easeInOut" }}
-                        className="text-6xl md:text-8xl lg:text-9xl font-[family-name:var(--font-cinzel)] font-light tracking-tight"
+                        className="text-6xl md:text-8xl lg:text-7xl font-[family-name:var(--font-cinzel)] font-light tracking-tight"
                     >
                         Hermit's Lair
                     </motion.h1>
