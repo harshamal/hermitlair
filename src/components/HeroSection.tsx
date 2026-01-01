@@ -124,9 +124,6 @@ export default function HeroSection() {
                     maskImage: hasLoaded
                         ? "radial-gradient(circle at center, transparent 150%, black 150%)"
                         : "radial-gradient(circle at center, transparent 0%, black 0%)",
-                    WebkitMaskImage: hasLoaded
-                        ? "radial-gradient(circle at center, transparent 150%, black 150%)"
-                        : "radial-gradient(circle at center, transparent 0%, black 0%)",
                 }}
                 transition={{ duration: 3.5, ease: [0.7, 0, 0.3, 1], delay: 1.5 }} // Delays reveal until lines draw
                 style={{ pointerEvents: "none" }}
