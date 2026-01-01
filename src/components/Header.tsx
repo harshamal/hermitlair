@@ -8,13 +8,31 @@ import Image from "next/image";
 
 export default function Header() {
     const [isScrolled, setIsScrolled] = useState(false);
+    const [isVisible, setIsVisible] = useState(true);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     // Handle scroll effect
     useEffect(() => {
+        let lastScrollY = window.scrollY;
+
         const handleScroll = () => {
-            setIsScrolled(window.scrollY > 50);
+            const currentScrollY = window.scrollY;
+
+            // Determine if scrolled for styling styling
+            setIsScrolled(currentScrollY > 50);
+
+            // Determine visibility based on scroll direction
+            if (currentScrollY > lastScrollY && currentScrollY > 100) {
+                // Scrolling down
+                setIsVisible(false);
+            } else {
+                // Scrolling up or at the top
+                setIsVisible(true);
+            }
+
+            lastScrollY = currentScrollY;
         };
+
         window.addEventListener("scroll", handleScroll, { passive: true });
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
@@ -22,23 +40,23 @@ export default function Header() {
     const navItems = [
         { name: "Our Story", href: "/story" },
         { name: "The Sanctuary", href: "/sanctuary" },
-        { name: "Chalets", href: "/chalets" },
-        { name: "Experiences", href: "/experiences" },
+        { name: "Packages", href: "/packages" },
+        { name: "FAQ", href: "/faq" },
     ];
 
     return (
         <>
             <motion.header
                 initial={{ y: -100 }}
-                animate={{ y: 0 }}
-                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                animate={{ y: isVisible ? 0 : "-100%" }}
+                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                 className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? "py-4" : "py-6 md:py-8"
                     }`}
             >
                 <div className="max-w-[1920px] mx-auto px-6 md:px-12">
                     <div className={`relative flex items-center justify-between transition-all duration-500 rounded-full px-6 py-3 ${isScrolled
-                            ? "bg-[#fbf9f5]/80 backdrop-blur-md border border-[#8b7355]/20 shadow-[0_8px_32px_rgba(0,0,0,0.05)]"
-                            : "bg-transparent"
+                        ? "bg-[#fbf9f5]/80 backdrop-blur-md border border-[#8b7355]/20 shadow-[0_8px_32px_rgba(0,0,0,0.05)]"
+                        : "bg-transparent"
                         }`}>
 
                         {/* 1. Logo Section */}
@@ -79,15 +97,17 @@ export default function Header() {
 
                         {/* 3. Actions / CTA */}
                         <div className="flex items-center gap-4">
-                            <button
-                                className={`hidden md:flex items-center gap-2 px-6 py-2.5 rounded-full transition-all duration-300 font-[family-name:var(--font-cinzel)] text-xs font-bold tracking-widest uppercase border ${isScrolled
+                            <Link href="/book">
+                                <button
+                                    className={`hidden md:flex items-center gap-2 px-6 py-2.5 rounded-full transition-all duration-300 font-[family-name:var(--font-cinzel)] text-xs font-bold tracking-widest uppercase border ${isScrolled
                                         ? "border-[#8b7355] text-[#8b7355] hover:bg-[#8b7355] hover:text-white"
                                         : "border-white/30 text-white hover:bg-white hover:text-[#4a3f2e]"
-                                    }`}
-                            >
-                                <Sparkles size={14} />
-                                <span>Book Now</span>
-                            </button>
+                                        }`}
+                                >
+                                    <Sparkles size={14} />
+                                    <span>Book Now</span>
+                                </button>
+                            </Link>
 
                             <button
                                 onClick={() => setIsMobileMenuOpen(true)}
@@ -166,9 +186,11 @@ export default function Header() {
                                 transition={{ delay: 0.6 }}
                                 className="flex flex-col items-center gap-6 mt-auto"
                             >
-                                <button className="w-full max-w-sm py-4 bg-[#8b7355] text-white font-[family-name:var(--font-cinzel)] tracking-widest uppercase rounded-full shadow-lg">
-                                    Book Your Stay
-                                </button>
+                                <Link href="/book" className="w-full max-w-sm">
+                                    <button className="w-full py-4 bg-[#8b7355] text-white font-[family-name:var(--font-cinzel)] tracking-widest uppercase rounded-full shadow-lg">
+                                        Book Your Stay
+                                    </button>
+                                </Link>
                                 <div className="flex gap-6 text-[#8b7355]/60">
                                     <a href="#" className="hover:text-[#8b7355] transition-colors"><Users size={20} /></a>
                                     <a href="#" className="hover:text-[#8b7355] transition-colors"><MapPin size={20} /></a>

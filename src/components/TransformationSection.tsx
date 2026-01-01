@@ -9,43 +9,49 @@ import { cn } from "@/lib/utils";
 // --- Data ---
 const moments = [
     {
-        id: "morning",
-        title: "Golden Hour",
-        subtitle: "The Awakening",
-        description: "Wake to the symphony of peacocks and the gentle warmth of the sun breaking through the mist. The world is reborn, and so are you.",
-        image: "https://hdblob1.blob.core.windows.net/hermit/ha%20(1).jpg",
-        icon: Sun,
-        color: "amber"
-    },
-    {
-        id: "nature",
-        title: "Living Silence",
-        subtitle: "The Connection",
-        description: "Walk where ancient monks once walked. The forest breathes with you. In this silence, you don't lose yourself—you find yourself.",
-        image: "https://hdblob1.blob.core.windows.net/hermit/DSCN0204.JPG",
-        icon: Bird,
-        color: "emerald"
-    },
-    {
-        id: "night",
-        title: "Celestial Canopy",
-        subtitle: "The Perspective",
-        description: "Under a blanket of a billion stars, your worries feel infinitely small. The universe watches over your sleep.",
-        image: "https://hdblob1.blob.core.windows.net/hermit/DSCN0311.JPG",
+        id: "step1",
+        title: "The Unplugging",
+        subtitle: "Step One",
+        description: "The first step is the hardest. Leaving the digital tether behind. We guide you gently into the offline world, where the only notifications are the calls of birds and the wind in the trees.",
+        image: "https://hdblob1.blob.core.windows.net/hermit/ha (19).jpg",
         icon: Moon,
-        color: "indigo"
+    },
+    {
+        id: "step2",
+        title: "The Grounding",
+        subtitle: "Step Two",
+        description: "Your feet touch the earth. The forest surrounds you. Through guided nature immersion, the nervous system shifts from 'fight or flight' to 'rest and digest'. You are no longer rushing.",
+        image: "https://hdblob1.blob.core.windows.net/hermit/DSCN0204.JPG",
+        icon: Wind,
+    },
+    {
+        id: "step3",
+        title: "The Inward Turn",
+        subtitle: "Step Three",
+        description: "With the external noise silenced, we teach you to navigate the internal. Daily meditation isn't a task here; it's a remembering of who you are beneath the roles you play.",
+        image: "https://hdblob1.blob.core.windows.net/hermit/meditatetransform.png",
+        icon: Sun,
+    },
+    {
+        id: "step4",
+        title: "The Release",
+        subtitle: "Step Four",
+        description: "Held by the mountains, you finally feel safe enough to let go. The anxiety, the expectations—they drift away like clouds over the Dimbulagala rock. You are exactly where you need to be.",
+        image: "https://hdblob1.blob.core.windows.net/hermit/pokuna.png",
+        icon: Bird,
+    },
+    {
+        id: "step5",
+        title: "The Integration",
+        subtitle: "Step Five",
+        description: "You don't just leave with a memory. You leave with a practice. A new way of being that you carry back into the noise, protecting your peace like a hidden flame.",
+        image: "https://hdblob1.blob.core.windows.net/hermit/DSCN0311.JPG",
+        icon: Sparkles,
     }
 ];
 
-const colorMap: Record<string, { bg: string, text: string, border: string, sub: string }> = {
-    amber: { bg: "bg-amber-500/10", text: "text-amber-400", border: "border-amber-500/20", sub: "text-amber-400" },
-    emerald: { bg: "bg-emerald-500/10", text: "text-emerald-400", border: "border-emerald-500/20", sub: "text-emerald-400" },
-    indigo: { bg: "bg-indigo-500/10", text: "text-indigo-400", border: "border-indigo-500/20", sub: "text-indigo-400" }
-};
-
 export default function TransformationSection() {
     const containerRef = useRef<HTMLDivElement>(null);
-    const scrollRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
         target: containerRef,
         offset: ["start start", "end end"]
@@ -57,12 +63,22 @@ export default function TransformationSection() {
         restDelta: 0.001
     });
 
+    const jumpToGallery = () => {
+        document.getElementById("experience")?.scrollIntoView({ behavior: "smooth" });
+        // Or just scroll the container end into view
+        if (containerRef.current) {
+            const nextSection = containerRef.current.nextElementSibling;
+            nextSection?.scrollIntoView({ behavior: "smooth" });
+        }
+    };
+
     // Parallax & Opacity transforms
     const opacityNoise = useTransform(smoothProgress, [0, 0.1], [1, 0]);
-    const opacityNature = useTransform(smoothProgress, [0.05, 0.15], [0, 1]);
-    const scaleNature = useTransform(smoothProgress, [0.05, 0.15], [0.8, 1]);
+    const opacityNature = useTransform(smoothProgress, [0.08, 0.15], [0, 1]);
+    const scaleNature = useTransform(smoothProgress, [0.08, 0.15], [0.8, 1]);
 
-    const xMove = useTransform(smoothProgress, [0.15, 0.9], ["0%", "-66.66%"]); // Move horizontally for 3 slides
+    // Move horizontally for 5 slides. Range 0 to -80% (4/5ths)
+    const xMove = useTransform(smoothProgress, [0.15, 0.9], ["0%", "-80%"]);
 
     return (
         <section ref={containerRef} className="relative bg-stone-950 text-white min-h-[400vh]">
@@ -70,32 +86,58 @@ export default function TransformationSection() {
             {/* STAGE 1: THE NOISE (Sticky Top) */}
             <div className="sticky top-0 h-screen overflow-hidden">
 
+                {/* OPTIMIZED BACKGROUND: Only renders 100vh instead of 400vh */}
+                <div className="absolute inset-0 z-0">
+                    <video
+                        src="https://hdblob1.blob.core.windows.net/hermit/Generating_Magical_Place_Video.mp4"
+                        autoPlay
+                        loop
+                        muted
+                        className="object-cover opacity-60 pointer-events-none"
+                    />
+                </div>
+
                 {/* Layer 1: The Noise / Chaos */}
                 <motion.div
                     style={{ opacity: opacityNoise }}
-                    className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-stone-200 text-stone-900 overflow-hidden"
+                    className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-stone-200/90 text-stone-900 overflow-hidden will-change-transform"
                 >
                     <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/noise.png')] opacity-40 mix-blend-multiply" />
 
-                    <div className="relative z-10 text-center space-y-8 px-6">
+                    <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
                         <motion.h2
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            className="text-5xl md:text-7xl font-[family-name:var(--font-cinzel)]  mb-8 tracking-tight text-[#8b7355]"
+                            transition={{ duration: 0.8 }}
+                            className="text-4xl md:text-6xl font-[family-name:var(--font-cinzel)] mb-8 tracking-tight text-[#5c5346]"
                         >
-                            NOISE
+                            THE NOISE OF THE WORLD
                         </motion.h2>
-                        <div className="space-y-2 font-[family-name:var(--font-cinzel)] text-sm md:text-base tracking-[0.3em] text-stone-600 uppercase">
-                            <p>Deadlines • Notifications • Traffic</p>
-                            <p>Pressure • Expectations • Anxiety</p>
-                        </div>
+
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            transition={{ delay: 0.3, duration: 1 }}
+                            className="space-y-6 text-lg md:text-2xl text-stone-700 font-[family-name:var(--font-cormorant)] font-light leading-relaxed max-w-2xl mx-auto"
+                        >
+                            <p>
+                                We live in an era of infinite connectivity, yet our minds have never been more fragmented.
+                                The relentless ping of notifications. The weight of unwritten emails. The city that refuses to sleep.
+                                It creates a static that drowns out the most important voice of all your own.
+                            </p>
+                            <p>
+                                You carry this weight every day. The invisible pressure to be "always on," to respond, to perform.
+                                It is not just noise; it is a thief that steals your peace.
+                            </p>
+                        </motion.div>
+
                         <motion.p
                             initial={{ opacity: 0 }}
                             whileInView={{ opacity: 1 }}
-                            transition={{ delay: 0.5 }}
-                            className="text-2xl md:text-4xl font-light text-stone-800 font-[family-name:var(--font-cormorant)] italic"
+                            transition={{ delay: 0.8, duration: 1 }}
+                            className="mt-12 text-2xl md:text-3xl text-[#8b7355] font-[family-name:var(--font-cinzel)] tracking-wide"
                         >
-                            Is this all there is?
+                            But what if you could just... <span className="italic">stop?</span>
                         </motion.p>
                     </div>
                 </motion.div>
@@ -105,7 +147,7 @@ export default function TransformationSection() {
                     style={{ opacity: opacityNature, scale: scaleNature }}
                     className="absolute inset-0 z-10 bg-gradient-to-b from-[#e3d5b5] via-[#fdfbf7] to-[#e3d5b5]"
                 >
-                    {/* Background Image/Video for the "Portal" feel */}
+                    {/* Background Image/Video */}
                     <div className="absolute inset-0">
                         <Image
                             src="https://hdblob1.blob.core.windows.net/hermit/hermitback%20(2).png"
@@ -120,10 +162,10 @@ export default function TransformationSection() {
                     <div className="relative h-full flex items-center overflow-hidden">
                         <motion.div
                             style={{ x: xMove }}
-                            className="flex h-[80vh] w-[300vw] px-[10vw] items-center gap-[10vw]"
+                            className="flex h-[80vh] w-[500vw] px-[10vw] items-center gap-[5vw] will-change-transform"
                         >
                             {moments.map((moment, index) => (
-                                <div key={moment.id} className="w-[80vw] md:w-[60vw] h-full flex flex-col md:flex-row shadow-2xl rounded-[3rem] overflow-hidden bg-[#fbf9f5] border border-[#8b7355]/20 relative group">
+                                <div key={moment.id} className="w-[85vw] md:w-[60vw] h-full flex flex-col md:flex-row shadow-2xl rounded-[3rem] overflow-hidden bg-[#fbf9f5] border border-[#8b7355]/20 relative group">
 
                                     {/* Image Side */}
                                     <div className="relative flex-1 h-1/2 md:h-full overflow-hidden">
@@ -137,7 +179,7 @@ export default function TransformationSection() {
                                     </div>
 
                                     {/* Content Side */}
-                                    <div className="flex-1 h-1/2 md:h-full p-8 md:p-16 flex flex-col justify-center bg-[#fbf9f5] relative">
+                                    <div className="flex-1 h-1/2 md:h-full p-8 md:p-12 lg:p-16 flex flex-col justify-center bg-[#fbf9f5] relative">
                                         {/* Decorative Icon */}
                                         <div className={`w-16 h-16 rounded-2xl bg-white flex items-center justify-center mb-8 border border-[#8b7355]/20 shadow-lg`}>
                                             <moment.icon className={`w-8 h-8 text-[#8b7355]`} />
@@ -148,7 +190,7 @@ export default function TransformationSection() {
                                                 <p className={`text-xs font-bold uppercase tracking-[0.3em] text-[#8b7355] mb-2 font-[family-name:var(--font-cinzel)]`}>
                                                     {moment.subtitle}
                                                 </p>
-                                                <h3 className="text-4xl md:text-6xl font-[family-name:var(--font-cinzel)] text-[#4a3f2e] tracking-tight leading-[0.9]">
+                                                <h3 className="text-3xl md:text-5xl font-[family-name:var(--font-cinzel)] text-[#4a3f2e] tracking-tight leading-[0.9]">
                                                     {moment.title}
                                                 </h3>
                                             </div>
@@ -170,21 +212,38 @@ export default function TransformationSection() {
                         </motion.div>
                     </div>
 
-                    {/* Instruction to scroll */}
-                    <motion.div
-                        style={{ opacity: useTransform(smoothProgress, [0.85, 0.9], [1, 0]) }}
-                        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-stone-500/50"
-                    >
-                        <div className="w-px h-12 bg-gradient-to-b from-stone-500/0 via-stone-500/50 to-stone-500/0" />
-                        <span className="text-xs uppercase tracking-[0.4em]">Journey Deeper</span>
-                    </motion.div>
+                    {/* Progress Bar & Skip */}
+                    <div className="absolute bottom-8 left-0 right-0 px-12 flex items-center justify-between z-40">
+                        {/* Progress Line */}
+                        <div className="flex flex-1 items-center gap-4 max-w-md">
+                            <span className="text-xs font-bold text-[#8b7355] tracking-widest uppercase">Start</span>
+                            <div className="h-1 bg-[#8b7355]/20 flex-1 rounded-full overflow-hidden relative">
+                                <motion.div
+                                    style={{ scaleX: smoothProgress }}
+                                    className="absolute inset-0 bg-[#8b7355] origin-left"
+                                />
+                            </div>
+                            <span className="text-xs font-bold text-[#8b7355] tracking-widest uppercase">Sanctuary</span>
+                        </div>
+
+                        {/* Skip Button */}
+                        <button
+                            onClick={jumpToGallery}
+                            className="ml-8 text-xs font-bold text-[#8b7355]/60 hover:text-[#8b7355] tracking-widest uppercase transition-colors"
+                        >
+                            Skip Animation &rarr;
+                        </button>
+                    </div>
 
                 </motion.div>
 
                 {/* Final CTA Overlay (appears at the end) */}
                 <motion.div
-                    style={{ opacity: useTransform(smoothProgress, [0.9, 0.95], [0, 1]), pointerEvents: useTransform(smoothProgress, (val) => val > 0.9 ? 'auto' : 'none') }}
-                    className="absolute inset-0 z-30 flex items-center justify-center bg-stone-950/80 backdrop-blur-md"
+                    style={{
+                        opacity: useTransform(smoothProgress, [0.85, 0.95], [0, 1]),
+                        pointerEvents: useTransform(smoothProgress, (val) => val > 0.85 ? 'auto' : 'none')
+                    }}
+                    className="absolute inset-0 z-30 flex items-center justify-center bg-stone-950/90 backdrop-blur-md will-change-[opacity]"
                 >
                     <div className="text-center p-12 max-w-4xl mx-auto">
                         <Sparkles className="w-12 h-12 text-[#8b7355] mx-auto mb-8 animate-pulse" />
@@ -195,7 +254,7 @@ export default function TransformationSection() {
                             The silence is calling. Will you answer?
                         </p>
                         <button
-                            onClick={() => document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" })}
+                            onClick={() => document.getElementById("booking-form")?.scrollIntoView({ behavior: "smooth" })}
                             className="bg-[#fbf9f5] text-[#4a3f2e] px-12 py-5 rounded-full text-lg tracking-[0.2em] uppercase font-bold hover:bg-[#8b7355] hover:text-white transition-all duration-500 shadow-xl border border-white/10"
                         >
                             Reserve Your Sanctuary

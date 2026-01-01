@@ -2,7 +2,7 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { Sparkles, Calendar, Users, Mountain, PenTool, Flower, Brain } from "lucide-react";
+import { Sparkles, Mountain, Users, PenTool, Brain, Flower } from "lucide-react";
 import Image from "next/image";
 
 export default function LegendSection() {
@@ -18,7 +18,7 @@ export default function LegendSection() {
     return (
         <section
             ref={containerRef}
-            className="relative py-32 px-6 bg-gradient-to-b from-warm-white via-linen to-cream overflow-hidden"
+            className="relative py-20 px-6 bg-gradient-to-b from-warm-white via-linen to-cream overflow-hidden"
         >
             {/* Enhanced Background */}
             <div className="absolute inset-0">
@@ -40,7 +40,7 @@ export default function LegendSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
-                    className="text-center mb-24"
+                    className="text-center mb-16"
                 >
                     <div className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white/70 backdrop-blur-md border border-sage/30 mb-8 shadow-lg">
                         <Sparkles className="w-4 h-4 text-sage-dark" />
@@ -49,7 +49,7 @@ export default function LegendSection() {
                         </span>
                     </div>
 
-                    <h2 className="text-6xl md:text-7xl lg:text-8xl font-serif text-shadow mb-6 tracking-tight leading-[1.1]"
+                    <h2 className="text-5xl md:text-6xl lg:text-7xl font-serif text-shadow mb-6 tracking-tight leading-[1.1]"
                         style={{ fontWeight: 300 }}>
                         The Legend of
                         <br />
@@ -71,9 +71,9 @@ export default function LegendSection() {
                     transition={{ duration: 0.8, ease: "easeOut" }}
                     className="mb-32"
                 >
-                    <div className="grid lg:grid-cols-12 gap-8 items-start">
+                    <div className="grid lg:grid-cols-12 gap-8 items-center">
                         {/* Left Column - Image */}
-                        <div className="lg:col-span-7">
+                        <div className="lg:col-span-5 lg:col-start-2">
                             <motion.div style={{ y: y1 }} className="relative group perspective-1000">
                                 <motion.div
                                     initial={{ opacity: 0, scale: 0.95 }}
@@ -93,9 +93,9 @@ export default function LegendSection() {
                                     <div className="absolute inset-3 md:inset-4 border border-[#8b7355]/30 rounded-lg pointer-events-none" />
 
                                     {/* Image Container */}
-                                    <div className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-inner border border-[#8b7355]/10">
+                                    <div className="relative aspect-video rounded-lg overflow-hidden shadow-inner border border-[#8b7355]/10">
                                         <Image
-                                            src="https://hdblob1.blob.core.windows.net/hermit/ha%20(1).jpg"
+                                            src="https://hdblob1.blob.core.windows.net/hermit/rock.png"
                                             alt="Ancient Dimbulagala Rock"
                                             fill
                                             className="object-cover transition-transform duration-1000 group-hover:scale-110"
@@ -134,7 +134,7 @@ export default function LegendSection() {
                                 viewport={{ once: true, margin: "-100px" }}
                                 className="relative z-10 mx-auto w-full -my-2.5 px-6 md:px-10 shadow-2xl bg-gradient-to-r from-[#e3d5b5] via-[#fdfbf7] via-60% to-[#e3d5b5] overflow-hidden"
                             >
-                                <div className="py-12">
+                                <div className="py-8">
                                     {/* Paper Texture & Effects */}
                                     <div className="absolute inset-0 opacity-[0.15] mix-blend-multiply pointer-events-none"
                                         style={{
@@ -247,11 +247,11 @@ export default function LegendSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
-                    className="mb-32"
+                    className="mb-16"
                 >
-                    <div className="grid lg:grid-cols-12 gap-8 items-start">
+                    <div className="grid lg:grid-cols-12 gap-8 items-center">
                         {/* Left Column - Content (Realistic Scroll Style) */}
-                        <div className="lg:col-span-5 relative group order-2 lg:order-1 px-4 md:px-6">
+                        <div className="lg:col-span-5 lg:col-start-2 relative group order-2 lg:order-1 px-4 md:px-6">
                             {/* Top Golden Rod */}
                             <div className="relative z-20 h-4 md:h-5 w-[108%] -left-[4%] bg-gradient-to-b from-[#7c6340] via-[#d4b483] to-[#7c6340] rounded-full shadow-xl flex items-center justify-between">
                                 {/* Left Finial */}
@@ -268,7 +268,7 @@ export default function LegendSection() {
                                 viewport={{ once: true, margin: "-100px" }}
                                 className="relative z-10 mx-auto w-full -my-2.5 px-6 md:px-10 shadow-2xl bg-gradient-to-r from-[#e3d5b5] via-[#fdfbf7] via-60% to-[#e3d5b5] overflow-hidden"
                             >
-                                <div className="py-12">
+                                <div className="py-8">
                                     {/* Paper Texture & Effects */}
                                     <div className="absolute inset-0 opacity-[0.15] mix-blend-multiply pointer-events-none"
                                         style={{
@@ -324,10 +324,6 @@ export default function LegendSection() {
                                                 In silence, they found answers. In stillness, they discovered peace. Their days
                                                 began before dawn, meditating as mist wrapped around the mountain.
                                             </motion.p>
-                                            <motion.p variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}>
-                                                Each hermit chose a cave, carved from the rock itself. Here they would sit for
-                                                hours, days, sometimes weeks in deep meditation.
-                                            </motion.p>
                                         </div>
 
                                         {/* Separator */}
@@ -362,7 +358,7 @@ export default function LegendSection() {
                         </div>
 
                         {/* Right Column - Image */}
-                        <div className="lg:col-span-7 order-1 lg:order-2">
+                        <div className="lg:col-span-5 order-1 lg:order-2">
                             <motion.div style={{ y: y2 }} className="relative group perspective-1000">
                                 <motion.div
                                     initial={{ opacity: 0, scale: 0.95 }}
@@ -382,7 +378,7 @@ export default function LegendSection() {
                                     <div className="absolute inset-3 md:inset-4 border border-[#8b7355]/30 rounded-lg pointer-events-none" />
 
                                     {/* Image Container */}
-                                    <div className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-inner border border-[#8b7355]/10">
+                                    <div className="relative aspect-video rounded-lg overflow-hidden shadow-inner border border-[#8b7355]/10">
                                         <Image
                                             src="https://hdblob1.blob.core.windows.net/hermit/DSCN0190.JPG"
                                             alt="Hermit Meditation Caves"
@@ -424,11 +420,11 @@ export default function LegendSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
-                    className="mb-24"
+                    className="mb-16"
                 >
-                    <div className="grid lg:grid-cols-12 gap-8 items-start">
+                    <div className="grid lg:grid-cols-12 gap-8 items-center">
                         {/* Left Column - Image */}
-                        <div className="lg:col-span-7">
+                        <div className="lg:col-span-5 lg:col-start-2">
                             <motion.div style={{ y: y1 }} className="relative group perspective-1000">
                                 <motion.div
                                     initial={{ opacity: 0, scale: 0.95 }}
@@ -448,7 +444,7 @@ export default function LegendSection() {
                                     <div className="absolute inset-3 md:inset-4 border border-[#8b7355]/30 rounded-lg pointer-events-none" />
 
                                     {/* Image Container */}
-                                    <div className="relative aspect-[4/3] rounded-lg overflow-hidden shadow-inner border border-[#8b7355]/10">
+                                    <div className="relative aspect-video rounded-lg overflow-hidden shadow-inner border border-[#8b7355]/10">
                                         <Image
                                             src="https://hdblob1.blob.core.windows.net/hermit/Untitled%20design%20(16).png"
                                             alt="Modern Hermit's Lair"
@@ -487,7 +483,7 @@ export default function LegendSection() {
                                 viewport={{ once: true, margin: "-100px" }}
                                 className="relative z-10 mx-auto w-full -my-2.5 px-6 md:px-10 shadow-2xl bg-gradient-to-r from-[#e3d5b5] via-[#fdfbf7] via-60% to-[#e3d5b5] overflow-hidden"
                             >
-                                <div className="py-12">
+                                <div className="py-8">
                                     {/* Paper Texture & Effects */}
                                     <div className="absolute inset-0 opacity-[0.15] mix-blend-multiply pointer-events-none"
                                         style={{
@@ -585,7 +581,7 @@ export default function LegendSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-                    className="mt-32"
+                    className="mt-20"
                 >
                     <div className="max-w-5xl mx-auto text-center relative">
                         <div className="absolute inset-0 bg-gradient-to-br from-sage/5 via-champagne/5 to-sage/5 rounded-3xl blur-2xl" />

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
+import Image from "next/image";
 import { ChevronDown, HelpCircle, Calendar, Utensils, Wifi, MapPin, Heart, Shield } from "lucide-react";
 import Footer from "@/components/Footer";
 
@@ -138,17 +139,23 @@ export default function FAQPage() {
     return (
         <main className="bg-warm-white min-h-screen">
             {/* Hero Section */}
-            <section className="relative py-32 px-6 bg-gradient-to-b from-shadow to-stone overflow-hidden">
-                <div className="absolute inset-0 opacity-20">
-                    <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-sage/30 rounded-full blur-3xl" />
-                    <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-champagne/30 rounded-full blur-3xl" />
+            <section className="relative h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-shadow to-stone">
+                <div className="absolute inset-0 z-0">
+                    <Image
+                        src="https://hdblob1.blob.core.windows.net/hermit/DSCN0165.JPG"
+                        alt="FAQ"
+                        fill
+                        className="object-cover opacity-60"
+                        priority
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
                 </div>
 
                 <motion.div
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 1 }}
-                    className="relative z-10 text-center max-w-4xl mx-auto"
+                    transition={{ duration: 1.5 }}
+                    className="relative z-10 text-center px-6 max-w-5xl"
                 >
                     <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/20 backdrop-blur-md border border-white/30 shadow-xl mb-8">
                         <HelpCircle className="w-4 h-4 text-white" />
@@ -168,13 +175,24 @@ export default function FAQPage() {
                         <span className="italic">Need to Know</span>
                     </h1>
 
-                    <p className="text-xl md:text-2xl text-white font-light leading-relaxed"
+                    <p className="text-xl md:text-2xl text-white font-light leading-relaxed max-w-2xl mx-auto"
                         style={{
                             textShadow: "0 2px 12px rgba(0,0,0,0.8)",
                         }}
                     >
                         Questions from fellow seekers, answered with care
                     </p>
+                </motion.div>
+
+                {/* Scroll Indicator */}
+                <motion.div
+                    animate={{ y: [0, 12, 0] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                    className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20"
+                >
+                    <span className="text-xs tracking-[0.2em] uppercase text-white font-bold drop-shadow-lg block mb-2">
+                        Scroll to explore
+                    </span>
                 </motion.div>
             </section>
 
